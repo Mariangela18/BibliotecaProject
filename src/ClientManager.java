@@ -43,20 +43,27 @@ public class ClientManager implements Runnable {
 
 
             if (cmd.equals("ADD")) {
+                Libro b = new Libro();
                 String cod_archiviazione = msg_scanner.next();
                 String titolo = msg_scanner.next();
                 String autore = msg_scanner.next();
                 String editore = msg_scanner.next();
-                Libro b = new Libro();
+                String stato= msg_scanner.next();
+                if(stato.equals("prestato")){
+                    String data_prelievo=msg_scanner.next();
+                    b.setData_prelievo(data_prelievo);
+                }
                 b.setCod_archiviazione(cod_archiviazione);
                 b.setTitolo(titolo);
                 b.setAutore(autore);
                 b.setCasa_editrice(editore);
-                    list.Aggiungi(b);
-                    //stampiamo la persona andando nella classe PERSON
-                    System.out.println("SERVER LOG : Libro Aggiunto--->" + b);
-                    pw.println("ADD_OK");
-                    pw.flush();
+                b.setStato(stato);
+
+                list.Aggiungi(b);
+                //stampiamo la persona andando nella classe PERSON
+                System.out.println("SERVER LOG : Libro Aggiunto--->" + b);
+                pw.println("ADD_OK");
+                pw.flush();
             } else if (cmd.equals("RIMUOVI")) {
                 Libro b = new Libro();
                 String cod_archiviazione = msg_scanner.next();

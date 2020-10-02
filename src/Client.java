@@ -47,8 +47,8 @@ public class Client implements Serializable {
                 System.out.println("1 - Aggiungi Libro");
                 System.out.println("2 - Rimuovi Libro");
                 System.out.println("3 - Elenco Archivio");
-                System.out.println("4 - Salva Libro");
-                System.out.println("5 - Esci");
+                System.out.println("4 - Salva Elenco");
+                System.out.println("0 - Esci");
                 System.out.println("----------------------");
                 System.out.println("Inserisci la tua scelta-->");
                 scelta = user_Scanner.nextInt();
@@ -63,18 +63,36 @@ public class Client implements Serializable {
                         String autore = user_Scanner.next();
                         System.out.println("Inserisci Casa Editrice");
                         String Casa_editrice = user_Scanner.next();
+                        System.out.println("Inserisci stato");
+                        String stato=user_Scanner.next();
+                        if (stato.equals("prestato")) {
+                            System.out.println("Inserisci la data di inizio prestito nel formato [gg/mm/yyyy]: ");
+                            String data_prelievo=user_Scanner.next();
+                            msg_to_send = "ADD " + cod_archiviazione + " " + titolo + " " + autore + " " + Casa_editrice + " "+stato+ " "+data_prelievo;
+                            System.out.println("Libro in prestito");
+                            System.out.println("DEBUG: Mando " + msg_to_send);
+                            pw.println(msg_to_send);
+                            pw.flush();
 
-                        msg_to_send = "ADD " + cod_archiviazione + " " + titolo + " " + autore + " " + Casa_editrice;
-                        System.out.println("DEBUG: Mando " + msg_to_send);
-                        pw.println(msg_to_send);
-                        pw.flush();
+                        } else if(stato.equals("libero")){
+                            System.out.println("Il libro e' libero");
+                            msg_to_send = "ADD " + cod_archiviazione + " " + titolo + " " + autore + " " + Casa_editrice + " "+stato;
+                            System.out.println("DEBUG: Mando " + msg_to_send);
+                            pw.println(msg_to_send);
+                            pw.flush();
+                        } else {
+                            System.out.println("Comando non valido");
+                        }
 
                         msg_received = server_scanner.nextLine();
-
                         if (msg_received.equals("ADD_OK")) {
                             System.out.println("Libro aggiunto correttamente!");
+                        } else if (msg_received.equals("ADD_ERROR")) {
+                            System.out.println("Errore nell'aggiunta della persona!!!");
                         } else {
                             System.out.println("ERRORE: messaggio sconosciuto->" + msg_received);
+
+
                         }
                         break;
 
@@ -136,7 +154,7 @@ public class Client implements Serializable {
                         }
                         break;
 
-                    case 5:
+                    case 0:
                         go = false;
                         System.out.println("Chiudo il client...");
                         msg_to_send = "ESCI";

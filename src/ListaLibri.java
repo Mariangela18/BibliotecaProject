@@ -6,9 +6,11 @@ import java.util.Date;
 
 public class ListaLibri implements Serializable{
 
+    Date d = new Date();
+    String datestring = d.toString();
+    //impacchettiamo tutto in una struttura dati
     private ArrayList<Libro> list;
     String ultimo_libro_aggiunto;
-    Libro codice_trovato=null;
 
 
     public ListaLibri() {
@@ -46,19 +48,27 @@ public class ListaLibri implements Serializable{
     }
 
     @Override
-        public String toString(){
-            String s;
-            s = "--------Inizio elenco    ";
-            s = s + "Data di aggiunta ----------" + ultimo_libro_aggiunto;
-            for (Libro b : list) {
-                s = s + "\n Codice---> " + b.getCod_archiviazione();
-                s = s + "\n Titolo---> " + b.getTitolo();
-                s = s + "\n Autore---> " + b.getAutore();
-                s = s + "\n Editore---> " + b.getCasa_editrice();
+    public String toString(){
+        String s;
+        s = "--------Inizio elenco    ";
+        s = s + "Data di aggiunta ----------" + ultimo_libro_aggiunto;
+        for (Libro b : list) {
+            s = s + "\n Codice---> " + b.getCod_archiviazione();
+            s = s + "\n Titolo---> " + b.getTitolo();
+            s = s + "\n Autore---> " + b.getAutore();
+            s = s + "\n Editore---> " + b.getCasa_editrice();
+            s = s+"\n Stato--->" +b.getStato();
+            if(b.getStato().equals("prestato")){
+                s = s+ " in data " +b.getData_prelievo();
+            } else if(b.getStato().equals("libero")){
+                s = s + ".";
             }
-            s = s + "\n Fine elenco \n";
-            return s;
+
         }
+        s = s + "\n Fine elenco \n";
+        return s;
+    }
+
 }
 
 

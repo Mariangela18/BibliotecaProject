@@ -5,6 +5,8 @@ public class Libro implements Serializable, Comparable<Libro> {
     private String titolo;
     private String Autore;
     private String Casa_editrice;
+    public String stato;
+    public String data_prelievo;
 
     public String getCasa_editrice() {
         return Casa_editrice;
@@ -39,13 +41,30 @@ public class Libro implements Serializable, Comparable<Libro> {
     }
 
 
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String nuovo_stato) {
+        stato = nuovo_stato;
+    }
+
+    public String getData_prelievo() {
+        return data_prelievo;
+    }
+
+    public void setData_prelievo(String data_prelievo) {
+        this.data_prelievo = data_prelievo;
+    }
+
     @Override
     public String toString() {
         return "Libro{" +
                 "cod_archiviazione='" + cod_archiviazione + '\'' +
                 ", titolo='" + titolo + '\'' +
                 ", Autore='" + Autore + '\'' +
-                ", Editore='" + Casa_editrice + '\'' +
+                ", Casa_editrice='" + Casa_editrice + '\'' +
+                ", stato='" + stato + '\'' +
                 '}';
     }
 
