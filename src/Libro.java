@@ -65,6 +65,7 @@ public class Libro implements Serializable, Comparable<Libro> {
                 ", Autore='" + Autore + '\'' +
                 ", Casa_editrice='" + Casa_editrice + '\'' +
                 ", stato='" + stato + '\'' +
+                ", data_prelievo='" + data_prelievo + '\'' +
                 '}';
     }
 
