@@ -7,8 +7,6 @@ import java.util.Date;
 public class ListaLibri implements Serializable{
 
     Date d = new Date();
-    String datestring = d.toString();
-    //impacchettiamo tutto in una struttura dati
     private ArrayList<Libro> list;
     String ultimo_libro_aggiunto;
 

@@ -60,7 +60,6 @@ public class ClientManager implements Runnable {
                 b.setStato(stato);
 
                 list.Aggiungi(b);
-                //stampiamo la persona andando nella classe PERSON
                 System.out.println("SERVER LOG : Libro Aggiunto--->" + b);
                 pw.println("ADD_OK");
                 pw.flush();
