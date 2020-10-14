@@ -48,6 +48,7 @@ public class Client implements Serializable {
                 System.out.println("2 - Rimuovi Libro");
                 System.out.println("3 - Elenco Archivio");
                 System.out.println("4 - Salva Elenco");
+                System.out.println("5 - Modifica stato");
                 System.out.println("0 - Esci");
                 System.out.println("----------------------");
                 System.out.println("Inserisci la tua scelta-->");
@@ -152,6 +153,21 @@ public class Client implements Serializable {
                         } else {
                             System.out.println("Messaggio sconosciuto---->" + msg_received);
                         }
+                        break;
+                    case 5:
+                        System.out.println("Inserisci codice e vai sul Server-->");
+                        cod_archiviazione = user_Scanner.next();
+                        msg_to_send = "MODIFICA "+cod_archiviazione;
+                        System.out.println("DEBUG: Mando--->" + msg_to_send);
+                        pw.println(msg_to_send);
+                        pw.flush();
+                        msg_received = server_scanner.nextLine();
+                        if (msg_received.equals("MODIFICA_OK")) {
+                            System.out.println("Codice trovato");
+                        } else {
+                            System.out.println("ERRORE: messaggio sconosciuto->" + msg_received);
+                        }
+
                         break;
 
                     case 0:

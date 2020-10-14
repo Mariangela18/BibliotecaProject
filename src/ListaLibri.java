@@ -30,6 +30,7 @@ public class ListaLibri implements Serializable{
         }
         return b_list;
     }
+    
 
 
     public boolean EliminaLibro(String cod_archiviazione) {

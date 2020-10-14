@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ClientManager implements Runnable {
     private Socket cm_socket;
     private ListaLibri list;
+    String stato;
 
 
     public ClientManager(Socket myclient, ListaLibri list) {
@@ -23,6 +24,7 @@ public class ClientManager implements Runnable {
         System.out.println("Connessione accettata da---->" + cm_socket.getRemoteSocketAddress());
         Scanner client_scanner = null;
         PrintWriter pw =null;
+        Scanner user_Scanner = new Scanner(System.in);
 
         try {
             client_scanner = new Scanner(cm_socket.getInputStream());
@@ -105,6 +107,29 @@ public class ClientManager implements Runnable {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+            }else if (cmd.equals("MODIFICA")) {
+                String cod_archiviazione = msg_scanner.next();
+                ArrayList<Libro> tmp = list.OttieniLista();
+                for (Libro b : tmp) {
+                    if (b.getCod_archiviazione().equals(cod_archiviazione)) {
+                        pw.println("MODIFICA_OK");
+                        pw.flush();
+                        System.out.println("Inserisci nuovo stato e ritorna sul Client-->");
+                        String nuovo_stato = user_Scanner.next();
+                        this.stato = nuovo_stato;
+                        b.setStato(nuovo_stato);
+                        if (nuovo_stato.equals("libero")) {
+                            b.setData_prelievo(null);
+                        } else if (nuovo_stato.equals("prestato")) {
+                            System.out.println("Inserisci la data di inizio prestito nel formato [gg/mm/yyyy]: ");
+                            String data_prelievo = user_Scanner.next();
+                            b.setData_prelievo(data_prelievo);
+                        }
+                        list.OttieniLista();
+
+                    }
+
                 }
             }
             else if (cmd.equals("ESCI")) {
